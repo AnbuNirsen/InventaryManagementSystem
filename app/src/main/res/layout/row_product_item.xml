@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_edit"
+        android:layout_margin="@dimen/dimen_8dp"
+        android:background="@drawable/rectangle_background"
+        android:padding="8dp"
+        android:text="Update"/>
+
+    <TextView
+        android:id="@+id/tv_heading_product_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_edit"
+        app:layout_constraintStart_toEndOf="@id/tv_heading_qnty"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/background"
+        android:padding="8dp"
+        android:layout_margin="2dp"
+        app:layout_constraintWidth_percent="25"
+        android:text="Product Name "
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:background="@color/background_value"
+        android:padding="8dp"
+        android:text="Product Name hgvcghf ghvghv "
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_heading_product_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_heading_product_name" />
+
+    <TextView
+        android:id="@+id/tv_heading_qnty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="@color/background"
+        android:padding="@dimen/dimen_8dp"
+        android:text="Qnty"
+        app:layout_constraintWidth_percent="25"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_heading_product_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_heading_product_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_heading_product_name" />
+
+    <TextView
+        android:id="@+id/tv_qnty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background_value"
+        android:padding="@dimen/dimen_8dp"
+        android:text="Qnty"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_heading_qnty"
+        app:layout_constraintStart_toStartOf="@+id/tv_heading_qnty"
+        app:layout_constraintTop_toBottomOf="@id/tv_heading_qnty" />
+
+    <TextView
+        android:id="@+id/tv_heading_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="@color/background"
+        android:padding="@dimen/dimen_8dp"
+        android:text="Price"
+        app:layout_constraintWidth_percent="25"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_heading_qnty"
+        app:layout_constraintStart_toEndOf="@+id/tv_heading_qnty"
+        app:layout_constraintEnd_toStartOf="@id/tv_total"
+        app:layout_constraintTop_toTopOf="@+id/tv_heading_qnty" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background_value"
+        android:padding="@dimen/dimen_8dp"
+        android:text="Price"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_heading_price"
+        app:layout_constraintStart_toStartOf="@+id/tv_heading_price"
+        app:layout_constraintTop_toBottomOf="@id/tv_heading_price" />
+
+    <TextView
+        android:id="@+id/tv_heading_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="@color/background"
+        android:padding="@dimen/dimen_8dp"
+        android:text="Product Total "
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_heading_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_heading_price"
+        app:layout_constraintTop_toTopOf="@+id/tv_heading_price"
+        app:layout_constraintWidth_percent="25" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background_value"
+        android:padding="@dimen/dimen_8dp"
+        android:text="Price"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_heading_total"
+        app:layout_constraintStart_toStartOf="@+id/tv_heading_total"
+        app:layout_constraintTop_toBottomOf="@id/tv_heading_total" />
+</androidx.constraintlayout.widget.ConstraintLayout>

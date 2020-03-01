@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">InventaryManagementSystem</string>
+    <string name="enter_name">Enter Your Name</string>
+    <string name="enter_phno">Enter Phno</string>
+    <string name="enter_email">Enter Email Id</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_cnfrm_password">Enter Confirm Password</string>
+    <string name="catagory">Catagory:</string>
+    <string name="no_selection">Not Selected</string>
+    <string name="product">Product:</string>
+    <string name="product_id">Product ID:</string>
+    <string name="product_qnty">Product Qty:</string>
+    <string name="product_price">Product Price:</string>
+    <string name="product_Totalprice">Total Price:</string>
+    <string name="product_manufacture_date">Manufacture Date</string>
+    <string name="product_expire_date">Expire Date</string>
+</resources>
