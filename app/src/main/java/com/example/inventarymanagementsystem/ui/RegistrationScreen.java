@@ -1,17 +1,20 @@
 package com.example.inventarymanagementsystem.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.inventarymanagementsystem.R;
 import com.example.inventarymanagementsystem.base.BaseActivity;
+import com.example.inventarymanagementsystem.room.entities.Catagory;
 import com.example.inventarymanagementsystem.room.entities.User;
 import com.example.inventarymanagementsystem.room.repository.InventoryRepo;
 import com.example.inventarymanagementsystem.utils.Constants;
@@ -19,6 +22,11 @@ import com.example.inventarymanagementsystem.utils.EmailValidator;
 import com.example.inventarymanagementsystem.utils.SharedPrefManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.threeten.bp.OffsetDateTime;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -51,11 +59,15 @@ public class RegistrationScreen extends BaseActivity {
 
 
     private Button button;
+    private Button button2;
+    private Toolbar toolbar;
 
     private InventoryRepo inventoryRepo;
 
     private SharedPrefManager sharedPreferences;
 
+    List<Catagory> catagoryList = new ArrayList<>();
+    int count =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +75,32 @@ public class RegistrationScreen extends BaseActivity {
         setContentView(R.layout.activity_registration_screen);
         inventoryRepo = new InventoryRepo(this);
         sharedPreferences = new SharedPrefManager(this);
+        setSupportActionBar(toolbar);
         initViews();
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         editTextListeners();
         clickListeners();
         observePublishSubjects();
+//        initCatagery();
+
     }
+
+//    private void updateCatagoryDetails(){
+//
+//        button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                inventoryRepo.updateCatagory(new Catagory(102,"Milky Bar","CANDY102","10","Candies","Pcs",OffsetDateTime.now().plusDays(30),OffsetDateTime.now()));
+//            }
+//        });
+//
+//    }
 
     private void observePublishSubjects() {
         compositeDisposable.add(inventoryRepo.userSignInObserver.flatMap(new Function<User, Observable<User>>() {
@@ -80,12 +113,8 @@ public class RegistrationScreen extends BaseActivity {
           .subscribe(new Consumer<User>() {
               @Override
               public void accept(User user) throws Exception {
-                  sharedPreferences.putString(Constants.USER_NAME,user.getUserName());
-                  sharedPreferences.putString(Constants.USER_PHNO,user.getPhoneNo());
-                  sharedPreferences.putString(Constants.USER_ADDRESS,user.getUserAddress());
-                  sharedPreferences.putString(Constants.USER_EMAIL_ID,user.getUserEmailId());
-                  sharedPreferences.putBoolean(Constants.IS_USER_LOGGED_IN,true);
-                  Toast.makeText(RegistrationScreen.this, user.getUserName(), Toast.LENGTH_SHORT).show();
+                  Toast.makeText(RegistrationScreen.this, "Sign in Success! "+user.getUserName(), Toast.LENGTH_SHORT).show();
+                  inventoryRepo.loginUser(user.getPhoneNo(),user.getUserPassword());
               }
           }));
         compositeDisposable.add(inventoryRepo.usererrorObserver.flatMap(new Function<String, Observable<String>>() {
@@ -99,6 +128,50 @@ public class RegistrationScreen extends BaseActivity {
                 Toast.makeText(RegistrationScreen.this, s, Toast.LENGTH_SHORT).show();
             }
         }));
+        compositeDisposable.add(
+                inventoryRepo.userLoggedObserver.flatMap(new Function<User, Observable<User>>() {
+                    @Override
+                    public Observable<User> apply(User user) throws Exception {
+                        return Observable.just(user);
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<User>() {
+                    @Override
+                    public void accept(User user) throws Exception {
+                        sharedPreferences.putString(Constants.USER_NAME,user.getUserName());
+                        sharedPreferences.putString(Constants.USER_PHNO,user.getPhoneNo());
+                        sharedPreferences.putString(Constants.USER_ADDRESS,user.getUserAddress());
+                        sharedPreferences.putString(Constants.USER_EMAIL_ID,user.getUserEmailId());
+                        sharedPreferences.putBoolean(Constants.IS_USER_LOGGED_IN,true);
+                        Toast.makeText(RegistrationScreen.this, "Login in Success! "+user.getUserName(), Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+        );
+        compositeDisposable.add(
+            inventoryRepo.catageryObserver.flatMap(new Function<String, Observable<String>>() {
+                @Override
+                public Observable<String> apply(String s) throws Exception {
+                    return Observable.just(s);
+                }
+            }).observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(new Consumer<String>() {
+                @Override
+                public void accept(String s) throws Exception {
+                    Toast.makeText(RegistrationScreen.this, "Catagory added  "+s, Toast.LENGTH_SHORT).show();
+                }
+            })
+        );
+        compositeDisposable.add(
+            inventoryRepo.catageryUpdateObserver.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.d("==>",""+integer);
+            }
+        })
+        );
     }
 
     private void clickListeners() {
@@ -120,6 +193,7 @@ public class RegistrationScreen extends BaseActivity {
         outlined_address = findViewById(R.id.outlined_address);
         outlined_password = findViewById(R.id.outlined_password);
         outlined_cnfrmPassword = findViewById(R.id.outlined_cnfrmPassword);
+//        button2 = findViewById(R.id.button2);
 
         et_name = findViewById(R.id.et_name);
         et_phno = findViewById(R.id.et_phno);
@@ -127,6 +201,7 @@ public class RegistrationScreen extends BaseActivity {
         et_address = findViewById(R.id.et_address);
         et_password = findViewById(R.id.et_password);
         et_cnfrmPassword = findViewById(R.id.et_cnfrm_password);
+        toolbar = findViewById(R.id.toolbar);
 
         button = findViewById(R.id.button);
     }
@@ -276,5 +351,16 @@ public class RegistrationScreen extends BaseActivity {
 
             }
         });
+    }
+
+    public void initCatagery(){
+        catagoryList.add(new Catagory(101,"Five Star","CANDY101","20","Candies","Pcs",OffsetDateTime.now().plusDays(18),OffsetDateTime.now()));
+        catagoryList.add(new Catagory(102,"Milky Bar","CANDY102","10","Candies","Pcs",OffsetDateTime.now().plusDays(120),OffsetDateTime.now()));
+        catagoryList.add(new Catagory(103,"Kit Kat","CANDY103","30","Candies","Pcs",OffsetDateTime.now().plusDays(32),OffsetDateTime.now()));
+        catagoryList.add(new Catagory(104,"Colgate","PHASTE201","40","Phaste","Pcs",OffsetDateTime.now().plusDays(30),OffsetDateTime.now()));
+        catagoryList.add(new Catagory(105,"CloseUp","PHASTE202","50","Phaste","Pcs",OffsetDateTime.now().plusDays(50),OffsetDateTime.now()));
+        for(Catagory catagory:catagoryList){
+            inventoryRepo.addCatagery(catagory);
+        }
     }
 }

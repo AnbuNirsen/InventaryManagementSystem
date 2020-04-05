@@ -115,7 +115,8 @@
             android:layout_height="wrap_content"
             android:text="@string/product"
             android:layout_marginStart="4dp"
-            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@id/tv_title_productId"
             app:layout_constraintStart_toEndOf="@+id/tv_title_productId"
             app:layout_constraintTop_toTopOf="@id/tv_title_productId" />
@@ -136,9 +137,10 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:maxLength="4"
+            android:inputType="number|numberDecimal"
             android:padding="@dimen/dimen_8dp"
             android:layout_marginStart="4dp"
-            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             app:layout_constraintBottom_toBottomOf="@id/tv_title_productQnty"
             app:layout_constraintStart_toEndOf="@+id/tv_title_productQnty"
             app:layout_constraintTop_toTopOf="@id/tv_title_productQnty" />
@@ -149,7 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Qnty"
-            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="@+id/tv_value_productQnty"
             app:layout_constraintStart_toEndOf="@+id/tv_value_productQnty"
             app:layout_constraintTop_toTopOf="@+id/tv_value_productQnty" />
@@ -166,12 +169,11 @@
 
         <TextView
             android:id="@+id/tv_value_productPrice"
-            style="@style/HomeText"
+            style="@style/ProductValueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/product_price"
-            android:layout_marginStart="4dp"
-            android:textColor="@color/textColor"
+           android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_title_productPrice"
             app:layout_constraintStart_toEndOf="@+id/tv_title_productPrice"
             app:layout_constraintTop_toTopOf="@id/tv_title_productPrice" />
@@ -187,12 +189,11 @@
 
         <TextView
             android:id="@+id/tv_value_TotalPrice"
-            style="@style/HomeText"
+            style="@style/ProductValueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/product_price"
             android:layout_marginStart="4dp"
-            android:textColor="@color/textColor"
             app:layout_constraintBottom_toBottomOf="@id/tv_title_productTotalPrice"
             app:layout_constraintStart_toEndOf="@+id/tv_title_productTotalPrice"
             app:layout_constraintTop_toTopOf="@id/tv_title_productTotalPrice" />
@@ -243,34 +244,24 @@
         <Button
             android:id="@+id/btn_add"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_16dp"
-            android:layout_marginTop="24dp"
-            android:text="Button"
+            android:layout_marginTop="12dp"
+            android:text="Add Product"
             android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_value_expire_date" />
 
-        <Button
-            android:id="@+id/btn_submit"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="@dimen/dimen_16dp"
-            android:text="Button"
-            android:textSize="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_value_expire_date" />
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_addproduct"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/rv_addproduct"
+            android:layout_margin="@dimen/dimen_8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/btn_submit"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="@dimen/dimen_8dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/btn_add"
+            tools:layout_editor_absoluteX="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

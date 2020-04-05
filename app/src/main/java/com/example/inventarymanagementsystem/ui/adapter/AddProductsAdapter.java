@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventarymanagementsystem.R;
+import com.example.inventarymanagementsystem.room.callbacks.UserCallBack;
 import com.example.inventarymanagementsystem.ui.models.ProductIItem;
 
 import java.util.ArrayList;
@@ -16,9 +17,10 @@ import java.util.ArrayList;
 public class AddProductsAdapter extends RecyclerView.Adapter<AddProductsAdapter.ViewHolder> {
 
     private ArrayList<ProductIItem> productList = new ArrayList<>();
-
-    public AddProductsAdapter(ArrayList<ProductIItem> productList) {
+    private UserCallBack userCallBack;
+    public AddProductsAdapter(ArrayList<ProductIItem> productList,UserCallBack userCallBack) {
         this.productList = productList;
+        this.userCallBack = userCallBack;
     }
 
     @NonNull
@@ -33,6 +35,12 @@ public class AddProductsAdapter extends RecyclerView.Adapter<AddProductsAdapter.
         holder.tv_product_name.setText(productList.get(position).getProductName());
         holder.tv_qnty.setText(productList.get(position).getQuantity());
         holder.tv_total.setText(productList.get(position).getTotal());
+        holder.tv_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userCallBack.userCallBack(productList.get(position));
+            }
+        });
     }
 
     @Override
@@ -45,12 +53,14 @@ public class AddProductsAdapter extends RecyclerView.Adapter<AddProductsAdapter.
         public TextView tv_qnty;
         public TextView tv_price;
         public TextView tv_total;
+        public TextView tv_edit;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_product_name = itemView.findViewById(R.id.tv_product_name);
             tv_qnty = itemView.findViewById(R.id.tv_qnty);
             tv_price = itemView.findViewById(R.id.tv_price);
             tv_total = itemView.findViewById(R.id.tv_total);
+            tv_edit = itemView.findViewById(R.id.tv_edit);
 
         }
     }

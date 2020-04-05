@@ -8,5 +8,6 @@ public class Constants {
     public static String USER_PHNO = "user_phno";
     public static String USER_EMAIL_ID = "user_email_id";
     public static String USER_ADDRESS = "user_address";
+    public static String PAST_HISTORY = "past_history";
 
 }

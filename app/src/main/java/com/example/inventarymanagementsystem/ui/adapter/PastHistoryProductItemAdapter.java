@@ -32,7 +32,7 @@ public class PastHistoryProductItemAdapter extends RecyclerView.Adapter<PastHist
         holder.tv_past_history_product_name.setText(pastHistoryProductItemList.get(position).getProductName());
         holder.tv_product_id.setText("Product ID: "+pastHistoryProductItemList.get(position).getProductId());
         holder.tv_product_price.setText("₹ "+String.valueOf(Integer.parseInt(pastHistoryProductItemList.get(position).getProductQnty()) * Integer.parseInt(pastHistoryProductItemList.get(position).getProductPrice())));
-        holder.tv_product_qnty_single_price.setText(pastHistoryProductItemList.get(position).getProductQnty() +" "+pastHistoryProductItemList.get(position).getQntyType()+" * "+" ₹ "+pastHistoryProductItemList.get(position).getProductPrice());
+        holder.tv_product_qnty_single_price.setText("("+pastHistoryProductItemList.get(position).getQntyType()+" * "+" ₹ "+pastHistoryProductItemList.get(position).getProductPrice()+")");
 
     }
 

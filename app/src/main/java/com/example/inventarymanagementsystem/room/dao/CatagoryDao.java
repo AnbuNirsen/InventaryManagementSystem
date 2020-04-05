@@ -11,16 +11,20 @@ import com.example.inventarymanagementsystem.room.entities.Catagory;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
 @Dao
 public interface CatagoryDao {
     @Query("SELECT * FROM Catagories")
-    List<Catagory> getCatagories();
+    Observable<List<Catagory>> getCatagories();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertCatagory(Catagory catagory);
+    Completable insertCatagory(Catagory catagory);
 
     @Update
-    void updateCatagory(Catagory catagory);
+    Single<Integer> updateCatagory(Catagory catagory);
 
     @Delete
     void DeleteCatagory(Catagory catagory);

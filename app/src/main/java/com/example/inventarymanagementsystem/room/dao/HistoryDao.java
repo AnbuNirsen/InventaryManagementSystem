@@ -10,18 +10,26 @@ import androidx.room.Update;
 import com.example.inventarymanagementsystem.room.entities.UserHistory;
 
 import java.util.List;
+
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
 @Dao
 public interface HistoryDao {
-    @Query("SELECT * FROM History WHERE UserPhnoNo=:userPhno ORDER BY Date")
-    List<UserHistory> getUserHistory(String userPhno);
+    @Query("SELECT * FROM History WHERE UserPhnoNo=:userPhno ORDER BY Date DESC")
+    Observable<List<UserHistory>> getUserHistory(String userPhno);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUserHistory(UserHistory userHistory);
+    Completable insertUserHistory(UserHistory userHistory);
 
     @Update
-    void updateUserHistory(UserHistory userHistory);
+    Single<Integer> updateUserHistory(UserHistory userHistory);
 
     @Delete
     void deleteUserHistory(UserHistory userHistory);
+
+    @Query("DELETE FROM History")
+    Completable truncateTable();
 
 }

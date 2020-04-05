@@ -1,5 +1,6 @@
 package com.example.inventarymanagementsystem.ui.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,9 @@ public class PastHistoryAdapter extends RecyclerView.Adapter<PastHistoryAdapter.
         holder.tv_customer_name.setText(pastHistoryList.get(position).getName());
         int totalValue = 0;
         for(int i=0;i<pastHistoryList.get(position).getPastHistoryList().size();i++){
-            totalValue = totalValue + Integer.parseInt(pastHistoryList.get(position).getPastHistoryList().get(i).getProductPrice());
+            Log.d("pos: "+position+" i: "+i+" =>",pastHistoryList.get(position).getPastHistoryList().get(i).toString());
+            totalValue = totalValue + pastHistoryList.get(position).getPastHistoryList().get(i).getTotalAmount();
+            Log.d("==>total Value",totalValue+" "+ pastHistoryList.get(position).getPastHistoryList().get(i).getTotalAmount());
         }
         holder.tv_total_amount.setText("₹ "+String.valueOf(totalValue));
         PastHistoryProductItemAdapter pastHistoryProductItemAdapter = new PastHistoryProductItemAdapter(pastHistoryList.get(position).getPastHistoryList());

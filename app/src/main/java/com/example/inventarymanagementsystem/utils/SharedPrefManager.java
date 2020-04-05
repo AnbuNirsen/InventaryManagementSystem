@@ -25,6 +25,11 @@ public class SharedPrefManager {
         editor.putBoolean(key,value);
         editor.commit();
     }
+
+    public void clearPreferences(){
+        editor.clear();
+        editor.commit();
+    }
     public boolean getBoolean(String key){
         return sharedPreferences.getBoolean(key,false);
     }

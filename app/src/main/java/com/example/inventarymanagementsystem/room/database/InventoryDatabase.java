@@ -15,7 +15,7 @@ import com.example.inventarymanagementsystem.room.entities.Catagory;
 import com.example.inventarymanagementsystem.room.entities.User;
 import com.example.inventarymanagementsystem.room.entities.UserHistory;
 
-@Database(entities = {User.class, Catagory.class, UserHistory.class},exportSchema = false,version = 1)
+@Database(entities = {User.class, Catagory.class, UserHistory.class},exportSchema = false,version = 4)
 @TypeConverters({DateConverter.class})
 public abstract class InventoryDatabase extends RoomDatabase {
     private static final String DB_NAME = "Inventory_DB";

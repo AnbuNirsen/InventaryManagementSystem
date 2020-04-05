@@ -1,5 +1,7 @@
 package com.example.inventarymanagementsystem.ui.models;
 
+import org.threeten.bp.OffsetDateTime;
+
 public class ProductIItem {
     private String productName;
     private String quantity;
@@ -7,11 +9,12 @@ public class ProductIItem {
     private String total;
     private String catagory;
     private String productId;
-    private String manufactureDate;
-    private String expireDate;
+    private OffsetDateTime manufactureDate;
+    private OffsetDateTime expireDate;
     private String catagoryId;
+    private int sno;
 
-    public ProductIItem(String productName, String quantity, String price, String total, String catagory, String productId, String manufactureDate, String expireDate, String catagoryId) {
+    public ProductIItem(String productName, String quantity, String price, String total, String catagory, String productId, OffsetDateTime manufactureDate, OffsetDateTime expireDate, String catagoryId, int sno) {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
@@ -21,6 +24,15 @@ public class ProductIItem {
         this.manufactureDate = manufactureDate;
         this.expireDate = expireDate;
         this.catagoryId = catagoryId;
+        this.sno = sno;
+    }
+
+    public int getSno() {
+        return sno;
+    }
+
+    public void setSno(int sno) {
+        this.sno = sno;
     }
 
     public String getProductName() {
@@ -71,19 +83,19 @@ public class ProductIItem {
         this.productId = productId;
     }
 
-    public String getManufactureDate() {
+    public OffsetDateTime getManufactureDate() {
         return manufactureDate;
     }
 
-    public void setManufactureDate(String manufactureDate) {
+    public void setManufactureDate(OffsetDateTime manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 
-    public String getExpireDate() {
+    public OffsetDateTime getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(String expireDate) {
+    public void setExpireDate(OffsetDateTime expireDate) {
         this.expireDate = expireDate;
     }
 

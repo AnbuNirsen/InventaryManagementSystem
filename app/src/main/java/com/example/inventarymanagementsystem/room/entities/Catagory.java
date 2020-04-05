@@ -98,4 +98,32 @@ public class Catagory {
     public void setProductManufactureDate(OffsetDateTime productManufactureDate) {
         this.productManufactureDate = productManufactureDate;
     }
+
+    public Catagory() {
+    }
+
+    public Catagory(int catagoryId, String productName, String productId, String productPrice, String catagoryName, String qntyType, OffsetDateTime prodctExpDate, OffsetDateTime productManufactureDate) {
+        this.catagoryId = catagoryId;
+        this.productName = productName;
+        this.productId = productId;
+        this.productPrice = productPrice;
+        this.catagoryName = catagoryName;
+        this.qntyType = qntyType;
+        this.prodctExpDate = prodctExpDate;
+        this.productManufactureDate = productManufactureDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Catagory{" +
+            "catagoryId=" + catagoryId +
+            ", productName='" + productName + '\'' +
+            ", productId='" + productId + '\'' +
+            ", productPrice='" + productPrice + '\'' +
+            ", catagoryName='" + catagoryName + '\'' +
+            ", qntyType='" + qntyType + '\'' +
+            ", prodctExpDate=" + prodctExpDate +
+            ", productManufactureDate=" + productManufactureDate +
+            '}';
+    }
 }

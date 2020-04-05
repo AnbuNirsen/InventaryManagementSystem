@@ -1,6 +1,8 @@
 package com.example.inventarymanagementsystem.ui.models;
 
-public class PastHistoryProductItem{
+import java.io.Serializable;
+
+public class PastHistoryProductItem implements Serializable {
         String productName;
         String productQnty;
         String productPrice;
@@ -64,4 +66,16 @@ public class PastHistoryProductItem{
         public void setQntyType(String qntyType) {
             this.qntyType = qntyType;
         }
+
+    @Override
+    public String toString() {
+        return "PastHistoryProductItem{" +
+            "productName='" + productName + '\'' +
+            ", productQnty='" + productQnty + '\'' +
+            ", productPrice='" + productPrice + '\'' +
+            ", productId='" + productId + '\'' +
+            ", qntyType='" + qntyType + '\'' +
+            ", totalAmount=" + totalAmount +
+            '}';
     }
+}

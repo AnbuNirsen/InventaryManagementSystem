@@ -1,6 +1,7 @@
 package com.example.inventarymanagementsystem.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,9 +14,14 @@ import com.example.inventarymanagementsystem.R;
 import com.example.inventarymanagementsystem.base.BaseActivity;
 import com.example.inventarymanagementsystem.room.entities.User;
 import com.example.inventarymanagementsystem.room.repository.InventoryRepo;
+import com.example.inventarymanagementsystem.utils.Constants;
 import com.example.inventarymanagementsystem.utils.SharedPrefManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends BaseActivity {
     private TextInputLayout outlined_phno;
@@ -25,6 +31,7 @@ public class LoginActivity extends BaseActivity {
     private TextInputEditText et_password;
 
     private Button button;
+    private Toolbar toolbar;
 
     //validation booleans
     private boolean isPhnoValid = false;
@@ -40,9 +47,38 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         inventoryRepo = new InventoryRepo(this);
         sharedPreferences = new SharedPrefManager(this);
+        setSupportActionBar(toolbar);
         initViews();
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         editClickListeners();
         clickListeners();
+        compositeDisposable.add(
+            inventoryRepo.usererrorObserver.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Consumer<String>() {
+                @Override
+                public void accept(String s) throws Exception {
+                    Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
+                }
+            })
+        );
+        compositeDisposable.add(
+            inventoryRepo.userLoggedObserver.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Consumer<User>() {
+                @Override
+                public void accept(User user) throws Exception {
+                    sharedPreferences.putString(Constants.USER_NAME,user.getUserName());
+                    sharedPreferences.putString(Constants.USER_PHNO,user.getPhoneNo());
+                    sharedPreferences.putString(Constants.USER_ADDRESS,user.getUserAddress());
+                    sharedPreferences.putString(Constants.USER_EMAIL_ID,user.getUserEmailId());
+                    sharedPreferences.putBoolean(Constants.IS_USER_LOGGED_IN,true);
+                    Toast.makeText(LoginActivity.this, "Login in Success! "+user.getUserName(), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            })
+        );
     }
 
     private void clickListeners() {
@@ -114,5 +150,6 @@ public class LoginActivity extends BaseActivity {
         et_phno = findViewById(R.id.et_phno);
         et_password = findViewById(R.id.et_password);
         button = findViewById(R.id.button);
+        toolbar = findViewById(R.id.toolbar);
     }
 }

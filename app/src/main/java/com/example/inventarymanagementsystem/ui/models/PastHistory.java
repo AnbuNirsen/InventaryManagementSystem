@@ -1,8 +1,9 @@
 package com.example.inventarymanagementsystem.ui.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PastHistory {
+public class PastHistory implements Serializable {
     String date;
     String name;
     List<PastHistoryProductItem> pastHistoryList;
@@ -37,5 +38,12 @@ public class PastHistory {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "PastHistory{" +
+            "date='" + date + '\'' +
+            ", name='" + name + '\'' +
+            ", pastHistoryList=" + pastHistoryList +
+            '}';
+    }
 }
