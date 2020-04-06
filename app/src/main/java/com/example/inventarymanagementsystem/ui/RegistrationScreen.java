@@ -353,14 +353,5 @@ public class RegistrationScreen extends BaseActivity {
         });
     }
 
-    public void initCatagery(){
-        catagoryList.add(new Catagory(101,"Five Star","CANDY101","20","Candies","Pcs",OffsetDateTime.now().plusDays(18),OffsetDateTime.now()));
-        catagoryList.add(new Catagory(102,"Milky Bar","CANDY102","10","Candies","Pcs",OffsetDateTime.now().plusDays(120),OffsetDateTime.now()));
-        catagoryList.add(new Catagory(103,"Kit Kat","CANDY103","30","Candies","Pcs",OffsetDateTime.now().plusDays(32),OffsetDateTime.now()));
-        catagoryList.add(new Catagory(104,"Colgate","PHASTE201","40","Phaste","Pcs",OffsetDateTime.now().plusDays(30),OffsetDateTime.now()));
-        catagoryList.add(new Catagory(105,"CloseUp","PHASTE202","50","Phaste","Pcs",OffsetDateTime.now().plusDays(50),OffsetDateTime.now()));
-        for(Catagory catagory:catagoryList){
-            inventoryRepo.addCatagery(catagory);
-        }
-    }
+
 }

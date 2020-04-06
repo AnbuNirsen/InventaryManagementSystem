@@ -33,6 +33,7 @@ public class InventoryRepo {
     public PublishSubject<String> catageryObserver = PublishSubject.create();
     public PublishSubject<Integer> catageryUpdateObserver = PublishSubject.create();
     public PublishSubject<Boolean> updateUserHistory = PublishSubject.create();
+    public PublishSubject<Boolean> catagoryDeleteObservable = PublishSubject.create();
     public PublishSubject<List<Catagory>> catageryListObserver = PublishSubject.create();
     public PublishSubject<List<UserHistory>> userHistoryListObserver = PublishSubject.create();
 
@@ -166,6 +167,27 @@ public class InventoryRepo {
             }
         });
     }
+
+    public void deleteCategory(){
+        inventoryDatabase.catagoryDao().truncateTable().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d("==>","deleted succesfully!");
+                catagoryDeleteObservable.onNext(true);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                catagoryDeleteObservable.onNext(false);
+            }
+        });
+    }
+
     public void updateUserHistory(UserHistory userHistory){
         inventoryDatabase.userHistoryDao().updateUserHistory(userHistory).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Consumer<Integer>() {
             @Override

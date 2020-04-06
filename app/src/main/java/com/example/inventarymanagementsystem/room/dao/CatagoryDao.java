@@ -28,4 +28,7 @@ public interface CatagoryDao {
 
     @Delete
     void DeleteCatagory(Catagory catagory);
+
+    @Query("DELETE FROM Catagories")
+    Completable truncateTable();
 }
